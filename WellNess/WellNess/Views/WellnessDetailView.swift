@@ -2,14 +2,12 @@ import SwiftUI
 
 struct WellnessDetailView: View {
     
-    @StateObject var viewModel: WellnessSelectedViewModel
+    let viewModel: WellnessSelectedViewModel
     
     init(
         viewModel: WellnessSelectedViewModel
     ) {
-        self._viewModel =  StateObject(
-            wrappedValue: viewModel
-        )
+        self.viewModel = viewModel
     }
     
     var body: some View {

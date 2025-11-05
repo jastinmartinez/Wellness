@@ -2,11 +2,14 @@ import SwiftUI
 
 struct WellnessFavoriteButtonView: View {
     
-    let isFavorite: Bool
+    @State var isFavorite: Bool
     let action: () -> Void
     
     var body: some View {
-        Button(action: action) {
+        Button(action: {
+            isFavorite = !isFavorite
+            action()
+        }) {
             Image(systemName: isFavorite ? "heart.fill" : "heart")
                 .imageScale(.large)
                 .symbolEffect(.bounce, value: isFavorite)
