@@ -1,0 +1,167 @@
+[
+  {
+    "id": "1",
+    "title": "Sunrise Vinyasa Flow",
+    "category": "yoga",
+    "durationMinutes": 45,
+    "rating": 4.8,
+    "imageURL": "https://images.unsplash.com/photo-1552196563-55cd4e45efb3",
+    "description": "Energize your morning with a dynamic vinyasa flow focusing on breath and alignment.",
+    "instructor": "Ava Martinez",
+    "date": "2025-11-01T08:30:00Z"
+  },
+  {
+    "id": "2",
+    "title": "Evening Mindfulness Meditation",
+    "category": "meditation",
+    "durationMinutes": 30,
+    "rating": 4.9,
+    "imageURL": "https://images.unsplash.com/photo-1540555700478-4be289fbecef",
+    "description": "Wind down with guided mindfulness and gentle breathing before bed.",
+    "instructor": "Luca Chen",
+    "date": "2025-11-02T21:30:00Z"
+  },
+  {
+    "id": "3",
+    "title": "Deep Tissue Massage",
+    "category": "massage",
+    "durationMinutes": 60,
+    "rating": 4.7,
+    "imageURL": "https://images.unsplash.com/photo-1600891964092-4316c288032e",
+    "description": "Relieve tension and improve mobility with targeted deep tissue techniques.",
+    "instructor": "Noah Patel",
+    "date": "2025-11-05T15:00:00Z"
+  },
+  {
+    "id": "4",
+    "title": "Power Pilates Core Challenge",
+    "category": "pilates",
+    "durationMinutes": 50,
+    "rating": 4.6,
+    "imageURL": "https://images.unsplash.com/photo-1599058917212-d750089bc07b",
+    "description": "Strengthen your core and improve posture with this high-intensity pilates workout.",
+    "instructor": "Maya Lopez",
+    "date": "2025-11-06T09:00:00Z"
+  },
+  {
+    "id": "5",
+    "title": "Guided Breathwork for Focus",
+    "category": "breathwork",
+    "durationMinutes": 25,
+    "rating": 4.9,
+    "imageURL": "https://images.unsplash.com/photo-1506126613408-eca07ce68773",
+    "description": "Enhance focus and calmness through structured breath control exercises.",
+    "instructor": "Ethan Rivera",
+    "date": "2025-11-06T14:30:00Z"
+  },
+  {
+    "id": "6",
+    "title": "Restorative Yin Yoga",
+    "category": "yoga",
+    "durationMinutes": 60,
+    "rating": 4.9,
+    "imageURL": "https://images.unsplash.com/photo-1584467735871-ecd1e3cfc5c0",
+    "description": "Unwind and release tension with long-held, passive postures designed for relaxation.",
+    "instructor": "Sophia Kim",
+    "date": "2025-11-07T18:00:00Z"
+  },
+  {
+    "id": "7",
+    "title": "Morning Breath Awareness",
+    "category": "breathwork",
+    "durationMinutes": 20,
+    "rating": 4.8,
+    "imageURL": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
+    "description": "Start your day with mindful breathing techniques to boost energy and clarity.",
+    "instructor": "Amir Johnson",
+    "date": "2025-11-08T07:00:00Z"
+  },
+  {
+    "id": "8",
+    "title": "Calm Mind, Calm Body",
+    "category": "meditation",
+    "durationMinutes": 35,
+    "rating": 4.7,
+    "imageURL": "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
+    "description": "A soothing guided meditation session to ease anxiety and calm the mind.",
+    "instructor": "Emily Zhang",
+    "date": "2025-11-09T20:00:00Z"
+  },
+  {
+    "id": "9",
+    "title": "Prenatal Yoga for Expecting Moms",
+    "category": "yoga",
+    "durationMinutes": 50,
+    "rating": 4.6,
+    "imageURL": "https://images.unsplash.com/photo-1599058917513-6894f3b828ec",
+    "description": "Gentle, safe yoga poses designed to support the changing body during pregnancy.",
+    "instructor": "Laura Garcia",
+    "date": "2025-11-10T09:30:00Z"
+  },
+  {
+    "id": "10",
+    "title": "Aromatherapy Relaxation Massage",
+    "category": "massage",
+    "durationMinutes": 55,
+    "rating": 4.9,
+    "imageURL": "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2",
+    "description": "Combines soothing aromatherapy oils with massage for deep relaxation.",
+    "instructor": "Kai Thompson",
+    "date": "2025-11-11T16:00:00Z"
+  },
+  {
+    "id": "11",
+    "title": "Pilates for Better Posture",
+    "category": "pilates",
+    "durationMinutes": 45,
+    "rating": 4.8,
+    "imageURL": "https://images.unsplash.com/photo-1584467735871-ecd1e3cfc5c0",
+    "description": "Improve spinal alignment and strengthen stabilizing muscles.",
+    "instructor": "Nina Roberts",
+    "date": "2025-11-12T10:00:00Z"
+  },
+  {
+    "id": "12",
+    "title": "Evening Gratitude Meditation",
+    "category": "meditation",
+    "durationMinutes": 25,
+    "rating": 5.0,
+    "imageURL": "https://images.unsplash.com/photo-1506126613408-eca07ce68773",
+    "description": "End your day with peaceful gratitude and mindfulness reflection.",
+    "instructor": "Ravi Singh",
+    "date": "2025-11-12T21:30:00Z"
+  },
+  {
+    "id": "13",
+    "title": "Full-Body Thai Massage",
+    "category": "massage",
+    "durationMinutes": 70,
+    "rating": 4.7,
+    "imageURL": "https://images.unsplash.com/photo-1570158268183-d296b2892211",
+    "description": "A traditional Thai massage combining acupressure and stretching.",
+    "instructor": "Isabella Cruz",
+    "date": "2025-11-13T15:30:00Z"
+  },
+  {
+    "id": "14",
+    "title": "Sunset Yoga by the Beach",
+    "category": "yoga",
+    "durationMinutes": 60,
+    "rating": 5.0,
+    "imageURL": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
+    "description": "Flow through mindful yoga movements while watching the sunset over the sea.",
+    "instructor": "Oliver White",
+    "date": "2025-11-14T18:30:00Z"
+  },
+  {
+    "id": "15",
+    "title": "Detox Breathwork Journey",
+    "category": "breathwork",
+    "durationMinutes": 40,
+    "rating": 4.9,
+    "imageURL": "https://images.unsplash.com/photo-1594737625785-c713e0f3e1e1",
+    "description": "Cleanse body and mind with rhythmic breath patterns and mindfulness techniques.",
+    "instructor": "Sara Novak",
+    "date": "2025-11-15T08:00:00Z"
+  }
+]
