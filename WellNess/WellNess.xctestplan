@@ -1,0 +1,60 @@
+{
+  "configurations" : [
+    {
+      "id" : "FAF8D624-EED0-4348-B334-D897D8542017",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "performanceAntipatternCheckerEnabled" : true,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:WellNess.xcodeproj",
+      "identifier" : "529CD8E72EBA9CD600B74FB4",
+      "name" : "WellNess"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : false,
+      "selectedTests" : {
+        "suites" : [
+          {
+            "name" : "RemoteWellnessDataSourceTests",
+            "testFunctions" : [
+              "test_fetchSessions_invalidJSON_throwsDecodingError()",
+              "test_fetchSessions_non200_throwsNetworkError()",
+              "test_fetchSessions_success_returnsDecodedSessions()"
+            ]
+          }
+        ],
+        "xctestClasses" : [
+          {
+            "name" : "RemoteWellnessDataSourceTests",
+            "xctestMethods" : [
+              "testFetchSessionsInvalidJSONThrowsDecodingError()",
+              "testFetchSessionsNon200ThrowsNetworkError()",
+              "testFetchSessionsSuccessReturnsDecodedSessions()"
+            ]
+          },
+          {
+            "name" : "RemoteWellnessServiceTests",
+            "xctestMethods" : [
+              "testFetchSessionsInvalidJSONThrowsDecoding()",
+              "testFetchSessionsSuccessReturnsDecodedSessions()",
+              "testFetchSessionsWhenURLIsNilThrowsFileNotFound()"
+            ]
+          }
+        ]
+      },
+      "target" : {
+        "containerPath" : "container:WellNess.xcodeproj",
+        "identifier" : "529CD8F42EBA9CD700B74FB4",
+        "name" : "WellNessTests"
+      }
+    }
+  ],
+  "version" : 1
+}
