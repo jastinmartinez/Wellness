@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		5296EEC22EBD0021008DAADB /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 5296EEC12EBD0021008DAADB /* ComposableArchitecture */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		529CD8F62EBA9CD700B74FB4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -45,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5296EEC22EBD0021008DAADB /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,6 +104,7 @@
 			);
 			name = WellNess;
 			packageProductDependencies = (
+				5296EEC12EBD0021008DAADB /* ComposableArchitecture */,
 			);
 			productName = WellNess;
 			productReference = 529CD8E82EBA9CD600B74FB4 /* WellNess.app */;
@@ -155,6 +161,9 @@
 			);
 			mainGroup = 529CD8DF2EBA9CD600B74FB4;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				5296EEC02EBD0021008DAADB /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 529CD8E92EBA9CD600B74FB4 /* Products */;
 			projectDirPath = "";
@@ -469,6 +478,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5296EEC02EBD0021008DAADB /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.23.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5296EEC12EBD0021008DAADB /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5296EEC02EBD0021008DAADB /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 529CD8E02EBA9CD600B74FB4 /* Project object */;
 }
