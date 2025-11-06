@@ -23,6 +23,7 @@ struct WellnessListView<D: View, R: View>: View {
             let loadingSessionString = "loading sessions..."
             let wellnessSessions = viewStore.wellnessSessions
             let favoriteCount = viewStore.wellnessSessions.lazy.filter(\.isFavorite).count
+            let accessibilityLabel = "Favorites count: \(favoriteCount)"
             let showIsLoadingWellnessSessions = viewStore.showIsLoadingWellnessSessions
             
             NavigationStack {
@@ -54,10 +55,11 @@ struct WellnessListView<D: View, R: View>: View {
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {
                         HStack(spacing: 6) {
-                            Image(systemName: "heart.fill").symbolRenderingMode(.multicolor)
+                            Image(systemName: "heart.fill")
+                                .symbolRenderingMode(.multicolor)
                             Text("\(favoriteCount)").font(.headline)
                         }
-                        .accessibilityLabel("Favorites count: \(favoriteCount)")
+                        .accessibilityLabel(accessibilityLabel)
                     }
                 }
                 .onAppear {
