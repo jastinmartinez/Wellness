@@ -1,6 +1,6 @@
 import Foundation
 
-final class LocalWellnessService: WellnessProvider {
+final class LocalWellnessService {
     
     private var dic = [String: WellnessSession]()
 

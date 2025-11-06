@@ -16,6 +16,8 @@ struct WWellnessSessionsReducer: Reducer {
         case didReceiveWellnessSessionsError(Error)
     }
     
+    @Dependency(\.wellnessSessionDataSource) private var wellnessSessionDataSource
+    
     func reduce(
         into state: inout State,
         action: Action
@@ -23,6 +25,14 @@ struct WWellnessSessionsReducer: Reducer {
         switch action {
             case .didTapLoadWellnessSessions:
                 state.showIsLoadingWellnessSessions = true
+                return .run { send in
+                    do {
+                       let wellnessSessions = try await wellnessSessionDataSource.getWellnessSession()
+                        await send(.didReceiveWellnessSessions(wellnessSessions))
+                    } catch {
+                        await send(.didReceiveWellnessSessionsError(error))
+                    }
+                }
             case let .didReceiveWellnessSessions(wellnessSessions):
                 let wellnessSessionsSorted = wellnessSessions.sorted(by: {$0.date < $1.date })
                 state.showIsLoadingWellnessSessions = false
