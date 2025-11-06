@@ -6,39 +6,27 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 @main
 struct WellNessApp: App {
     
-    @StateObject var wellnessViewModel: WellnessViewModel
-    
-    init() {
-        let remoteWellnessDataSource = RemoteWellnessService()
-        let localViewModel = LocalWellnessService()
-        let wellnessService = WellnessService(
-            remoteDataSource: remoteWellnessDataSource,
-            localDataSource: localViewModel
-        )
-        self._wellnessViewModel = StateObject(
-            wrappedValue: WellnessViewModel(
-                wellnessProvider: wellnessService
-            )
-        )
-    }
+   
+    private let wellnessStore: StoreOf<WWellnessSessionsReducer> = {
+        Store(initialState: WWellnessSessionsReducer.State()) {
+            WWellnessSessionsReducer()
+        }
+    }()
     
     var body: some Scene {
         WindowGroup {
             WellnessListView(
-                titleString: wellnessViewModel.titleString,
-                loadingSessionString: wellnessViewModel.loadingSessionString,
-                wellnessState: wellnessViewModel.wellnessState,
-                loadWellnessSession: wellnessViewModel.load,
-                favoriteCount: wellnessViewModel.favoriteCount,
+                wellnessSessionStore: wellnessStore,
                 wellNessRowView: { wellnessSession in
                     WellnessRowView(
                         viewModel: .init(
                             wellnessSession: wellnessSession,
-                            wellnessViewModel: wellnessViewModel
+//                            wellnessViewModel: wellnessViewModel
                         )
                     )
                 },
@@ -46,7 +34,7 @@ struct WellNessApp: App {
                     WellnessDetailView(
                         viewModel: .init(
                             wellnessSession: wellnessSession,
-                            wellnessViewModel: wellnessViewModel
+//                            wellnessViewModel: wellnessViewModel
                         )
                     )
                 }

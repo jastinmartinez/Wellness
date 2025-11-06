@@ -4,14 +4,14 @@ internal import Combine
 final class WellnessSelectedViewModel: ObservableObject {
     
     @Published var wellnessSession: WellnessSession
-    private let wellnessViewModel: WellnessViewModel
+//    private let wellnessViewModel: WellnessViewModel
     
     init(
         wellnessSession: WellnessSession,
-        wellnessViewModel: WellnessViewModel
+//        wellnessViewModel: WellnessViewModel
     ) {
         self.wellnessSession = wellnessSession
-        self.wellnessViewModel = wellnessViewModel
+//        self.wellnessViewModel = wellnessViewModel
     }
     
     var url: URL? {
@@ -63,9 +63,9 @@ final class WellnessSelectedViewModel: ObservableObject {
             date: oldWellnessSession.date,
             isFavorite: !oldWellnessSession.isFavorite
         )
-        wellnessViewModel.setFavorite(
-            newWellnessSession
-        )
+//        wellnessViewModel.setFavorite(
+//            newWellnessSession
+//        )
         wellnessSession = newWellnessSession
     }
 }

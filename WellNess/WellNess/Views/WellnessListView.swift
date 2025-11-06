@@ -1,87 +1,69 @@
 import SwiftUI
+import ComposableArchitecture
 
 struct WellnessListView<D: View, R: View>: View {
     
-    private let titleString: String
-    private let loadingSessionString: String
-    private let wellnessState: ModelState<[WellnessSession]>
-    private let favoriteCount: Int
-    private let loadWellnessSession: () async -> Void
+    private let wellnessSessionStore: StoreOf<WWellnessSessionsReducer>
     private let wellNessRowView: (WellnessSession) -> R
     private let wellNessDetailView: (WellnessSession) -> D
     
     init(
-        titleString: String,
-        loadingSessionString: String,
-        wellnessState: ModelState<[WellnessSession]>,
-        loadWellnessSession: @escaping () async -> Void,
-        favoriteCount: Int,
+        wellnessSessionStore: StoreOf<WWellnessSessionsReducer>,
         wellNessRowView: @escaping (WellnessSession) -> R,
         wellNessDetailView: @escaping (WellnessSession) -> D
     ) {
-        self.titleString = titleString
-        self.loadingSessionString = loadingSessionString
-        self.wellnessState = wellnessState
+        self.wellnessSessionStore = wellnessSessionStore
         self.wellNessDetailView = wellNessDetailView
-        self.favoriteCount = favoriteCount
         self.wellNessRowView = wellNessRowView
-        self.loadWellnessSession = loadWellnessSession
     }
     
     var body: some View {
-        NavigationStack {
-            Group {
-                content(
-                    using: wellnessState
-                )
-            }
-            .navigationTitle(titleString)
-            .toolbarTitleDisplayMode(.large)
-            .toolbar { favoritesToolbar }
-            .task {
-                await loadWellnessSession()
-            }
-        }
-    }
-    
-    @ViewBuilder
-    private func content(
-        using dataState: ModelState<[WellnessSession]>
-    ) -> some View {
-        switch dataState {
-            case .loading:
-                LoadingView(
-                    model: .init(
-                        name: loadingSessionString
-                    )
-                )
-            case let .success(data):
-                List {
-                    ForEach(data) { wellnessSession in
-                        NavigationLink(value: wellnessSession) {
-                            wellNessRowView(wellnessSession)
+        WithViewStore(wellnessSessionStore, observe: { $0 } ) { viewStore in
+            let titleString = "Wellness"
+            let loadingSessionString = "loading sessions..."
+            let wellnessSessions = viewStore.wellnessSessions
+            let favoriteCount = viewStore.wellnessSessions.filter(\.isFavorite).count
+            let showIsLoadingWellnessSessions = viewStore.showIsLoadingWellnessSessions
+            
+            NavigationStack {
+                VStack {
+                    if showIsLoadingWellnessSessions {
+                        LoadingView(
+                            model: .init(
+                                name: loadingSessionString
+                            )
+                        )
+                    } else {
+                        List {
+                            ForEach(wellnessSessions) { wellnessSession in
+                                NavigationLink(value: wellnessSession) {
+                                    wellNessRowView(wellnessSession)
+                                }
+                            }
+                        }
+                        .listStyle(.insetGrouped)
+                        .navigationDestination(for: WellnessSession.self) { wellnessSession in
+                            wellNessDetailView(
+                                wellnessSession
+                            )
                         }
                     }
                 }
-                .listStyle(.insetGrouped)
-                .navigationDestination(for: WellnessSession.self) { wellnessSession in
-                    wellNessDetailView(
-                        wellnessSession
-                    )
+                .navigationTitle(titleString)
+                .toolbarTitleDisplayMode(.large)
+                .toolbar {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        HStack(spacing: 6) {
+                            Image(systemName: "heart.fill").symbolRenderingMode(.multicolor)
+                            Text("\(favoriteCount)").font(.headline)
+                        }
+                        .accessibilityLabel("Favorites count: \(favoriteCount)")
+                    }
                 }
-            case .failure:
-                EmptyView()
-        }
-    }
-    
-    @ToolbarContentBuilder
-    private var favoritesToolbar: some ToolbarContent {
-        ToolbarItem(placement: .topBarTrailing) {
-            HStack(spacing: 6) {
-                Image(systemName: "heart.fill").symbolRenderingMode(.multicolor)
-                Text("\(favoriteCount)").font(.headline)
+                .onAppear {
+                    viewStore.send(.didTapLoadWellnessSessions)
+                }
             }
-            .accessibilityLabel("Favorites count: \(favoriteCount)")
         }
     }
 }

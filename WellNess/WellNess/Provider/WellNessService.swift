@@ -27,4 +27,3 @@ final class WellnessService: WellnessProvider {
         localDataSource.setFavoriteSession(session)
     }
 }
-
