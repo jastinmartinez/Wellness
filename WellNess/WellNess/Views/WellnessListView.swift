@@ -22,7 +22,7 @@ struct WellnessListView<D: View, R: View>: View {
             let titleString = "Wellness"
             let loadingSessionString = "loading sessions..."
             let wellnessSessions = viewStore.wellnessSessions
-            let favoriteCount = viewStore.wellnessSessions.filter(\.isFavorite).count
+            let favoriteCount = viewStore.wellnessSessions.lazy.filter(\.isFavorite).count
             let showIsLoadingWellnessSessions = viewStore.showIsLoadingWellnessSessions
             
             NavigationStack {

@@ -11,7 +11,6 @@ import ComposableArchitecture
 @main
 struct WellNessApp: App {
     
-   
     private let wellnessStore: StoreOf<WWellnessSessionsReducer> = {
         Store(initialState: WWellnessSessionsReducer.State()) {
             WWellnessSessionsReducer()
