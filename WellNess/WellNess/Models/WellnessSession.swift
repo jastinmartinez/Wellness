@@ -69,6 +69,4 @@ struct WellnessSession: Identifiable, Codable, Equatable, Hashable {
         self.date = date
         self.isFavorite = isFavorite
     }
-    
-    
 }
