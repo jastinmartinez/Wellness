@@ -16,7 +16,7 @@ extension WellnessListView  {
             favoriteCount: favoriteCount,
             wellnessSessions: wellnessSessions,
             onAppear: {
-                viewStore.send(.didTapLoadWellnessSessions)
+                viewStore.send(.didTapLoadWellnessSessionsOnce)
             }
         )
         self.wellNessRowView = { wellnessSession in

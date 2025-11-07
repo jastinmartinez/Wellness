@@ -13,7 +13,7 @@ struct WellnessSessionsReducer: Reducer {
     
     @CasePathable
     enum Action {
-        case didTapLoadWellnessSessions
+        case didTapLoadWellnessSessionsOnce
         case didReceiveWellnessSessions([WellnessSession])
         case didReceiveWellnessSessionsError(Error)
         case didTapSaveWellnessSession(WellnessSessionReducer.Action)
@@ -28,16 +28,19 @@ struct WellnessSessionsReducer: Reducer {
         
         Reduce { state, action in
             switch action {
-                case .didTapLoadWellnessSessions:
-                    state.showIsLoadingWellnessSessions = true
-                    return .run(priority: .userInitiated) { [wellnessSessionDataSource] send in
-                        do {
-                            let wellnessSessions = try await wellnessSessionDataSource.getWellnessSession()
-                            await send(.didReceiveWellnessSessions(wellnessSessions))
-                        } catch {
-                            await send(.didReceiveWellnessSessionsError(error))
+                case .didTapLoadWellnessSessionsOnce:
+                    if state.wellnessSessions.isEmpty {
+                        state.showIsLoadingWellnessSessions = true
+                        return .run(priority: .userInitiated) { [wellnessSessionDataSource] send in
+                            do {
+                                let wellnessSessions = try await wellnessSessionDataSource.getWellnessSession()
+                                await send(.didReceiveWellnessSessions(wellnessSessions))
+                            } catch {
+                                await send(.didReceiveWellnessSessionsError(error))
+                            }
                         }
                     }
+                    return .none
                 case let .didReceiveWellnessSessions(wellnessSessions):
                     let wellnessSessionsSorted = wellnessSessions.sorted(by: {$0.date < $1.date })
                     state.showIsLoadingWellnessSessions = false
