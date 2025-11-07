@@ -22,8 +22,8 @@ extension WellnessListView  {
         self.wellNessRowView = { wellnessSession in
             AnyView(
                 WellnessRowView(
-                    viewModel: .init(
-                        wellnessSession: wellnessSession
+                    model: .init(
+                        wellnessSession
                     )
                 )
             )

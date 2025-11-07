@@ -2,17 +2,17 @@ import SwiftUI
 
 struct WellnessRowView: View {
     
-    let viewModel: WellnessSelectedViewModel
+    let model: Model
     
     init(
-        viewModel: WellnessSelectedViewModel
+        model: Model
     ) {
-        self.viewModel = viewModel
+        self.model = model
     }
     
     var body: some View {
         HStack(alignment: .center, spacing: 12) {
-            AsyncImage(url: viewModel.url) { phase in
+            AsyncImage(url: model.url) { phase in
                 switch phase {
                     case .empty:
                         ZStack { ProgressView() }
@@ -36,22 +36,32 @@ struct WellnessRowView: View {
             }
             VStack(alignment: .leading, spacing: 6) {
                 HStack {
-                    Text(viewModel.title)
+                    Text(model.title)
                         .font(.headline)
                         .lineLimit(1)
                 }
                 HStack(spacing: 8) {
-                    Text(viewModel.categoryTitle)
+                    Text(model.category)
                     Text("•")
-                    Text(viewModel.durationMinutes)
+                    Text(model.duration)
                     Text("•")
-                    Text(viewModel.rating)
+                    Text(model.rating)
                 }
                 .font(.caption)
                 .foregroundStyle(.secondary)
             }
         }
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(viewModel.title), \(viewModel.categoryTitle), \(viewModel.durationMinutes) \(viewModel.rating)")
+        .accessibilityLabel("\(model.title), \(model.category), \(model.duration) \(model.rating)")
+    }
+}
+
+extension WellnessRowView {
+    struct Model {
+        let title: String
+        let category: String
+        let rating: String
+        let duration: String
+        let url: URL?
     }
 }
