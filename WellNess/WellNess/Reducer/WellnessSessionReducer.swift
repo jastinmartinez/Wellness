@@ -13,30 +13,32 @@ struct WellnessSessionReducer: Reducer {
         case delegate(Delegate)
     }
     
-    func reduce(into state: inout State, action: Action) -> Effect<Action> {
-        switch action {
-            case .didTapFavorite:
-                guard let oldWellnessSession = state.wellnessSession else {
+    var body: some Reducer<State, Action> {
+        Reduce { state, action in
+            switch action {
+                case .didTapFavorite:
+                    guard let oldWellnessSession = state.wellnessSession else {
+                        return .none
+                    }
+                    let newWellnessSession = WellnessSession(
+                        id: oldWellnessSession.id,
+                        title: oldWellnessSession.title,
+                        category: oldWellnessSession.category,
+                        durationMinutes: oldWellnessSession.durationMinutes,
+                        rating: oldWellnessSession.rating,
+                        description: oldWellnessSession.description,
+                        instructor: oldWellnessSession.instructor,
+                        date: oldWellnessSession.date,
+                        isFavorite: !oldWellnessSession.isFavorite
+                    )
+                    state.wellnessSession = newWellnessSession
+                    return .send(.delegate(.saveWellnessSession(newWellnessSession)))
+                case .delegate:
                     return .none
-                }
-                let newWellnessSession = WellnessSession(
-                    id: oldWellnessSession.id,
-                    title: oldWellnessSession.title,
-                    category: oldWellnessSession.category,
-                    durationMinutes: oldWellnessSession.durationMinutes,
-                    rating: oldWellnessSession.rating,
-                    description: oldWellnessSession.description,
-                    instructor: oldWellnessSession.instructor,
-                    date: oldWellnessSession.date,
-                    isFavorite: !oldWellnessSession.isFavorite
-                )
-                state.wellnessSession = newWellnessSession
-                return .send(.delegate(.saveWellnessSession(newWellnessSession)))
-            case .delegate:
-                return .none
-            case let .didTapSelect(wellnessSession):
-                state.wellnessSession = wellnessSession
-                return .none
+                case let .didTapSelect(wellnessSession):
+                    state.wellnessSession = wellnessSession
+                    return .none
+            }
         }
     }
 }

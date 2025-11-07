@@ -1,4 +1,5 @@
 import SwiftUI
+import Kingfisher
 
 struct WellnessRowView: View {
     
@@ -12,28 +13,22 @@ struct WellnessRowView: View {
     
     var body: some View {
         HStack(alignment: .center, spacing: 12) {
-            AsyncImage(url: model.url) { phase in
-                switch phase {
-                    case .empty:
-                        ZStack { ProgressView() }
-                            .frame(width: 72, height: 72)
-                            .background(.gray.opacity(0.15))
-                            .clipShape(RoundedRectangle(cornerRadius: 12))
-                    case .success(let image):
-                        image
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 72, height: 72)
-                            .clipShape(RoundedRectangle(cornerRadius: 12))
-                    case .failure:
-                        ZStack { Image(systemName: "photo") }
-                            .frame(width: 72, height: 72)
-                            .background(.gray.opacity(0.15))
-                            .clipShape(RoundedRectangle(cornerRadius: 12))
-                    @unknown default:
-                        EmptyView()
+            KFImage.url(model.url)
+                .placeholder {
+                    ZStack { ProgressView() }
+                        .frame(width: 72, height: 72)
+                        .background(.gray.opacity(0.15))
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
                 }
-            }
+                .loadDiskFileSynchronously()
+                .cacheMemoryOnly()
+                .fade(duration: 0.25)
+                .serialize(as: .PNG)
+                .resizable()
+                .scaledToFill()
+                .frame(width: 72, height: 72)
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+           
             VStack(alignment: .leading, spacing: 6) {
                 HStack {
                     Text(model.title)
