@@ -17,6 +17,14 @@ extension WellnessListView  {
             wellnessSessions: wellnessSessions,
             onAppear: {
                 viewStore.send(.didTapLoadWellnessSessionsOnce)
+            },
+            onRowTap: { wellnessSession in
+                viewStore.send(.didTapSaveWellnessSession(.didTapSelect(wellnessSession)))
+                viewStore.send(.didShowWellnessSession(true))
+            },
+            showNavigation: viewStore.showWellnessSession,
+            onNavigation: { isPresented in
+                viewStore.send(.didShowWellnessSession(isPresented))
             }
         )
         self.wellNessRowView = { wellnessSession in
@@ -28,7 +36,8 @@ extension WellnessListView  {
                 )
             )
         }
-        self.wellNessDetailView = { wellnessSession in
+        
+        self.wellNessDetailView = {
             AnyView(
                 WithViewStore(store, observe: { $0 }) { viewStore in
                     WellnessDetailView(
@@ -36,9 +45,6 @@ extension WellnessListView  {
                             viewStore: viewStore
                         )
                     )
-                    .onAppear {
-                        viewStore.send(.didTapSelect(wellnessSession))
-                    }
                 }
             )
         }

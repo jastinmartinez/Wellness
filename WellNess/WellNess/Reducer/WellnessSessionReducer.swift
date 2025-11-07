@@ -26,6 +26,7 @@ struct WellnessSessionReducer: Reducer {
                         category: oldWellnessSession.category,
                         durationMinutes: oldWellnessSession.durationMinutes,
                         rating: oldWellnessSession.rating,
+                        imageURL: oldWellnessSession.imageURL,
                         description: oldWellnessSession.description,
                         instructor: oldWellnessSession.instructor,
                         date: oldWellnessSession.date,

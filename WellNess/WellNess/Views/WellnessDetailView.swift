@@ -8,20 +8,17 @@ struct WellnessDetailView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
-                KFImage.url(model.url)
-                    .placeholder {
+                WellnessPhotoView(
+                    url: model.url,
+                    placeHolder: {
                         ZStack { ProgressView() }
                             .frame(height: 220)
                             .frame(maxWidth: .infinity)
                     }
-                    .loadDiskFileSynchronously()
-                    .cacheMemoryOnly()
-                    .fade(duration: 0.25)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(height: 240)
-                    .frame(maxWidth: .infinity)
-                    .clipped()
+                )
+                .frame(height: 240)
+                .frame(maxWidth: .infinity)
+                .clipped()
                 
                 VStack(alignment: .leading, spacing: 8) {
                     Text(model.title).font(.title).bold()

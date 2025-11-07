@@ -8,6 +8,7 @@ struct WellnessSessionsReducer: Reducer {
         var wellnessSessions: [WellnessSession] = []
         var wellnessSessionsError: String = ""
         var showWellnessSessionsError: Bool = false
+        var showWellnessSession = false
         var wellnessSession = WellnessSessionReducer.State()
     }
     
@@ -17,6 +18,7 @@ struct WellnessSessionsReducer: Reducer {
         case didReceiveWellnessSessions([WellnessSession])
         case didReceiveWellnessSessionsError(Error)
         case didTapSaveWellnessSession(WellnessSessionReducer.Action)
+        case didShowWellnessSession(Bool)
     }
     
     @Dependency(\.wellnessSessionDataSource) var wellnessSessionDataSource
@@ -57,6 +59,9 @@ struct WellnessSessionsReducer: Reducer {
                     }
                     return .none
                 case .didTapSaveWellnessSession:
+                    return .none
+                case .didShowWellnessSession(let isPresented):
+                    state.showWellnessSession = isPresented
                     return .none
             }
         }

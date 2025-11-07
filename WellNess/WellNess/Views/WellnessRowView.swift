@@ -1,5 +1,4 @@
 import SwiftUI
-import Kingfisher
 
 struct WellnessRowView: View {
     
@@ -13,22 +12,18 @@ struct WellnessRowView: View {
     
     var body: some View {
         HStack(alignment: .center, spacing: 12) {
-            KFImage.url(model.url)
-                .placeholder {
+            WellnessPhotoView(
+                url: model.url,
+                placeHolder: {
                     ZStack { ProgressView() }
                         .frame(width: 72, height: 72)
                         .background(.gray.opacity(0.15))
                         .clipShape(RoundedRectangle(cornerRadius: 12))
                 }
-                .loadDiskFileSynchronously()
-                .cacheMemoryOnly()
-                .fade(duration: 0.25)
-                .serialize(as: .PNG)
-                .resizable()
-                .scaledToFill()
-                .frame(width: 72, height: 72)
-                .clipShape(RoundedRectangle(cornerRadius: 12))
-           
+            )
+            .frame(width: 72, height: 72)
+            .clipShape(RoundedRectangle(cornerRadius: 12))
+            
             VStack(alignment: .leading, spacing: 6) {
                 HStack {
                     Text(model.title)

@@ -4,12 +4,12 @@ struct WellnessListView: View {
     
     let model: Model
     let wellNessRowView: (WellnessSession) -> AnyView
-    let wellNessDetailView: (WellnessSession) -> AnyView
+    let wellNessDetailView: () -> AnyView
     
     init(
         model: Model,
         wellNessRowView: @escaping (WellnessSession) -> AnyView,
-        wellNessDetailView: @escaping (WellnessSession) -> AnyView
+        wellNessDetailView: @escaping () -> AnyView
     ) {
         self.model = model
         self.wellNessDetailView = wellNessDetailView
@@ -27,17 +27,23 @@ struct WellnessListView: View {
                     )
                 } else {
                     List {
-                        ForEach(model.wellnessSessions) { wellnessSession in
-                            NavigationLink(value: wellnessSession) {
+                        ForEach(model.wellnessSessions, id:\.id) { wellnessSession in
+                            Button {
+                                model.onRowTap(wellnessSession)
+                            } label: {
                                 wellNessRowView(wellnessSession)
                             }
+                            .buttonStyle(.plain)
                         }
                     }
                     .listStyle(.insetGrouped)
-                    .navigationDestination(for: WellnessSession.self) { wellnessSession in
-                        wellNessDetailView(
-                            wellnessSession
+                    .navigationDestination(
+                        isPresented: Binding(
+                            get: { model.showNavigation },
+                            set: { value in  model.onNavigation(value) }
                         )
+                    ) {
+                        wellNessDetailView()
                     }
                 }
             }
@@ -67,5 +73,8 @@ extension WellnessListView {
         let favoriteCount: Int
         let wellnessSessions: [WellnessSession]
         let onAppear: () -> Void
+        let onRowTap: (WellnessSession) -> Void
+        let showNavigation: Bool
+        let onNavigation: (Bool) -> Void
     }
 }
