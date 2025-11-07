@@ -1,19 +1,14 @@
 import SwiftUI
+import ComposableArchitecture
 
 struct WellnessDetailView: View {
     
-    let viewModel: WellnessSelectedViewModel
-    
-    init(
-        viewModel: WellnessSelectedViewModel
-    ) {
-        self.viewModel = viewModel
-    }
+    let model: Model
     
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
-                AsyncImage(url: viewModel.url) { phase in
+                AsyncImage(url: model.url) { phase in
                     switch phase {
                         case .empty:
                             ZStack { ProgressView() }
@@ -38,11 +33,11 @@ struct WellnessDetailView: View {
                 }
                 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text(viewModel.title).font(.title).bold()
+                    Text(model.title).font(.title).bold()
                     HStack(spacing: 12) {
-                        Text(viewModel.categoryTitle)
-                        Label(viewModel.durationMinutes, systemImage: "clock")
-                        Label(viewModel.rating, systemImage: "star.fill")
+                        Text(model.category)
+                        Label(model.duration, systemImage: "clock")
+                        Label(model.rating, systemImage: "star.fill")
                     }
                     .foregroundStyle(.secondary)
                     .font(.subheadline)
@@ -50,8 +45,8 @@ struct WellnessDetailView: View {
                     Divider().padding(.vertical, 4)
                     
                     VStack(alignment: .leading, spacing: 6) {
-                        Label(viewModel.instructor, systemImage: "person.text.rectangle")
-                        Label(viewModel.date, systemImage: "calendar")
+                        Label(model.instructor, systemImage: "person.text.rectangle")
+                        Label(model.date, systemImage: "calendar")
                     }
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
@@ -59,7 +54,7 @@ struct WellnessDetailView: View {
                     Text("About this session")
                         .font(.headline)
                         .padding(.top, 8)
-                    Text(viewModel.description)
+                    Text(model.description)
                         .font(.body)
                         .foregroundStyle(.primary)
                 }
@@ -71,10 +66,25 @@ struct WellnessDetailView: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 WellnessFavoriteButtonView(
-                    isFavorite: viewModel.isFavorite,
-                    action: viewModel.favorite,
+                    isFavorite: model.isFavorite,
+                    action: model.onFavorite
                 )
             }
         }
+    }
+}
+
+extension WellnessDetailView {
+    struct Model {
+        let title: String
+        let url: URL?
+        let category: String
+        let duration: String
+        let rating: String
+        let date: String
+        let description: String
+        let instructor: String
+        let isFavorite: Bool
+        let onFavorite: () -> Void
     }
 }

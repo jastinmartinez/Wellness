@@ -11,33 +11,20 @@ import ComposableArchitecture
 @main
 struct WellNessApp: App {
     
-    private let wellnessStore: StoreOf<WWellnessSessionsReducer> = {
-        Store(initialState: WWellnessSessionsReducer.State()) {
-            WWellnessSessionsReducer()
+    private let wellnessStore: StoreOf<WellnessSessionsReducer> = {
+        Store(initialState: WellnessSessionsReducer.State()) {
+            WellnessSessionsReducer()
         }
     }()
     
     var body: some Scene {
         WindowGroup {
-            WellnessListView(
-                wellnessSessionStore: wellnessStore,
-                wellNessRowView: { wellnessSession in
-                    WellnessRowView(
-                        viewModel: .init(
-                            wellnessSession: wellnessSession,
-//                            wellnessViewModel: wellnessViewModel
-                        )
-                    )
-                },
-                wellNessDetailView: { wellnessSession in
-                    WellnessDetailView(
-                        viewModel: .init(
-                            wellnessSession: wellnessSession,
-//                            wellnessViewModel: wellnessViewModel
-                        )
-                    )
-                }
-            )
+            WithViewStore(wellnessStore, observe: { $0 }) { viewStore in
+                WellnessListView(
+                    viewStore: viewStore,
+                    store: wellnessStore.scope(state: \.wellnessSession, action: \.didTapSaveWellnessSession)
+                )
+            }
         }
     }
 }
